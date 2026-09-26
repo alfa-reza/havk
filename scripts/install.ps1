@@ -694,7 +694,7 @@ function ConvertFrom-JcodeVersionOutput([string]$Output) {
     # A genuinely fresh profile may print the one-time telemetry notice before
     # the version. When output is captured by PowerShell, terminal control
     # sequences can also leave the final `jcode v...` on the same logical line.
-    if ($Output -match '(?i)\bjcode\s+v?([0-9][0-9A-Za-z.+-]*)') {
+    if ($Output -match '(?i)\b(havk|jcode)\s+v?([0-9][0-9A-Za-z.+-]*)') {
         return "v$($Matches[1])"
     }
 

@@ -62,12 +62,12 @@ pub fn find_repo_in_ancestors(start: &Path) -> Option<PathBuf> {
 }
 
 pub fn binary_stem() -> &'static str {
-    "jcode"
+    "havk"
 }
 
 pub fn binary_name() -> &'static str {
     if cfg!(windows) {
-        "jcode.exe"
+        "havk.exe"
     } else {
         binary_stem()
     }
@@ -184,8 +184,8 @@ fn selfdev_build_command_for_target_on_platform(
         explicit => explicit,
     };
     let specs = match target {
-        SelfDevBuildTarget::Tui => vec![("jcode", "jcode")],
-        SelfDevBuildTarget::All | SelfDevBuildTarget::Auto => vec![("jcode", "jcode")],
+        SelfDevBuildTarget::Tui => vec![("havk", "havk")],
+        SelfDevBuildTarget::All | SelfDevBuildTarget::Auto => vec![("havk", "havk")],
     };
     let wrapper = repo_dir.join("scripts").join("dev_cargo.sh");
     // `bash` on Windows may resolve to WSL, which cannot use the native Rust
@@ -610,7 +610,7 @@ pub fn is_jcode_repo(dir: &Path) -> bool {
 
     // Read Cargo.toml and check package name
     if let Ok(content) = std::fs::read_to_string(&cargo_toml)
-        && content.contains("name = \"jcode\"")
+        && (content.contains("name = \"havk\"") || content.contains("name = \"jcode\""))
     {
         return true;
     }
@@ -656,8 +656,8 @@ mod tests {
     fn every_build_target_builds_its_own_package() {
         let repo = repo_fixture(false);
         let cases = [
-            (SelfDevBuildTarget::Tui, vec!["-p jcode "]),
-            (SelfDevBuildTarget::All, vec!["-p jcode "]),
+            (SelfDevBuildTarget::Tui, vec!["-p havk "]),
+            (SelfDevBuildTarget::All, vec!["-p havk "]),
         ];
         for (target, expected) in cases {
             let command = selfdev_build_command_for_target(repo.path(), target);
@@ -693,9 +693,9 @@ mod tests {
                 "--profile",
                 "selfdev",
                 "-p",
-                "jcode",
+                "havk",
                 "--bin",
-                "jcode"
+                "havk"
             ]
         );
         assert!(
@@ -743,9 +743,9 @@ mod tests {
                 "--profile",
                 "selfdev",
                 "-p",
-                "jcode",
+                "havk",
                 "--bin",
-                "jcode",
+                "havk",
             ]
         );
     }

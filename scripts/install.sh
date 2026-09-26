@@ -280,10 +280,10 @@ else
   src_dir="$tmpdir/jcode-src"
   git clone --depth 1 --branch "$VERSION" "https://github.com/$REPO.git" "$src_dir" \
     || err "Failed to clone $REPO at $VERSION"
-  cargo build --release --manifest-path "$src_dir/Cargo.toml" \
+  cargo build --release --manifest-path "$src_dir/Cargo.toml" -p havk --bin havk \
     || err "cargo build failed while building $REPO from source"
 
-  src_bin="$src_dir/target/release/$bin_name"
+  src_bin="$src_dir/target/release/havk${EXE}"
   [ -f "$src_bin" ] || err "Built binary not found at $src_bin"
   cp "$src_bin" "$dest_version_dir/$bin_name"
 fi
