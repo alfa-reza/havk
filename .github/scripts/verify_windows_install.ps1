@@ -24,7 +24,7 @@ if (-not $Version) {
     }
 
     $artifactVersionText = ($artifactVersionOutput -join "`n")
-    if ($artifactVersionText -notmatch '(?i)\bjcode\s+v?(\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?)\b') {
+    if ($artifactVersionText -notmatch '(?i)\b(havk|jcode)\s+v?(\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?)\b') {
         throw "Could not parse jcode version from local artifact output: $artifactVersionText"
     }
     $Version = 'v' + $Matches[1]
