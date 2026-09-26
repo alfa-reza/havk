@@ -108,7 +108,7 @@ async fn binary_integration_openai_provider() -> Result<()> {
     Ok(())
 }
 
-/// Test that jcode version command works
+/// Test that havk version command works
 #[tokio::test]
 async fn binary_version_command() -> Result<()> {
     use std::process::Command;
@@ -122,8 +122,8 @@ async fn binary_version_command() -> Result<()> {
 
     assert!(output.status.success(), "Version command should succeed");
     assert!(
-        stdout.contains("havk") || stdout.contains("jcode") || stdout.contains("20"),
-        "Version should contain 'havk' or date. Got: {}",
+        stdout.to_ascii_lowercase().contains("havk"),
+        "Version output should identify HAVK. Got: {}",
         stdout
     );
 
