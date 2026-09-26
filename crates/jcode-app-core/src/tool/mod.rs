@@ -24,6 +24,7 @@ mod file_diff;
 pub(crate) mod file_lock;
 mod gmail;
 // The initiative tool is intentionally unregistered (4928a1c92) but kept for re-enable.
+pub mod applet;
 #[allow(dead_code)]
 mod goal;
 pub mod inflight;
@@ -385,6 +386,7 @@ impl Registry {
                 side_panel::SidePanelTool::new,
             );
             Self::insert_tool_timed(&mut m, &mut timings, "panel", panel::PanelTool::new);
+            Self::insert_tool_timed(&mut m, &mut timings, "applet", applet::AppletTool::new);
             Self::insert_tool_timed(&mut m, &mut timings, "edit", edit::EditTool::new);
             // `multiedit` merged into `edit`, and `patch` into `apply_patch`.
             // Both old names still resolve through `resolve_tool_name`.

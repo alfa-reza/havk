@@ -3232,6 +3232,7 @@ dependencies = [
  "ignore",
  "jcode-agent-runtime",
  "jcode-ambient-types",
+ "jcode-applet-types",
  "jcode-base",
  "jcode-build-meta",
  "jcode-build-support",
@@ -3325,6 +3326,7 @@ dependencies = [
  "hex",
  "image",
  "jcode-agent-runtime",
+ "jcode-applet-types",
  "jcode-auth-types",
  "jcode-azure-auth",
  "jcode-background-types",
@@ -3476,6 +3478,7 @@ dependencies = [
 name = "jcode-harness-api"
 version = "0.1.0"
 dependencies = [
+ "jcode-applet-types",
  "jcode-session-types",
  "jcode-side-panel-types",
  "jcode-usage-types",
@@ -3491,6 +3494,7 @@ dependencies = [
  "jcode-background-types",
  "jcode-base",
  "jcode-harness-api",
+ "jcode-session-types",
  "jcode-transport",
  "libc",
  "rusqlite",
@@ -3600,6 +3604,7 @@ name = "jcode-protocol"
 version = "0.1.0"
 dependencies = [
  "anyhow",
+ "jcode-applet-types",
  "jcode-batch-types",
  "jcode-config-types",
  "jcode-message-types",
@@ -3980,6 +3985,7 @@ name = "jcode-sdk"
 version = "0.1.0"
 dependencies = [
  "anyhow",
+ "jcode-applet-types",
  "jcode-harness-api",
  "jcode-provider-metadata",
  "jcode-transport",
