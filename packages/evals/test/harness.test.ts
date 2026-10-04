@@ -3,6 +3,7 @@ import { join } from "node:path";
 import { CONFIG_DIR_NAME, getAgentDir, getDocsPath, getExamplesPath, getReadmePath } from "@alfa-reza/havk";
 import { describe, expect, it, vi } from "vitest";
 import { buildSystemPrompt } from "../../coding-agent/src/core/system-prompt.ts";
+import { CODING_AGENT_DIR_ENV_NAME } from "../src/distribution.ts";
 import {
 	applyIsolatedEnvironment,
 	createPiDocumentationEvalHarness,
@@ -12,7 +13,6 @@ import {
 	resolveModelSelection,
 	verifySystemPrompt,
 } from "../src/harness.ts";
-import { CODING_AGENT_DIR_ENV_NAME } from "../src/distribution.ts";
 
 describe("resolveModelSelection", () => {
 	it("prefers an explicit harness model", () => {
@@ -80,7 +80,7 @@ describe("documentation variant", () => {
 			cwd: "/workspace",
 			selectedTools: [...DOCUMENTATION_EVAL_TOOLS],
 		});
-		expect(prompt).toContain("\n<docs>\nPi documentation (read only");
+		expect(prompt).toContain("\n<docs>\n");
 		expect(prompt).toContain("\n<rules>\n");
 		expect(prompt).toContain("\n<cwd>\n/workspace\n</cwd>");
 		expect(prompt).toContain("docs/models.md");

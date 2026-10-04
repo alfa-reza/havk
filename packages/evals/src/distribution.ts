@@ -8,9 +8,7 @@ type CodingAgentPackageJson = {
 	};
 };
 
-const packageJson = JSON.parse(
-	readFileSync(join(getPackageDir(), "package.json"), "utf8"),
-) as CodingAgentPackageJson;
+const packageJson = JSON.parse(readFileSync(join(getPackageDir(), "package.json"), "utf8")) as CodingAgentPackageJson;
 
 const appName = packageJson.piConfig?.name || "pi";
 

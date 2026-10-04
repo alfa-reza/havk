@@ -6,8 +6,8 @@ import { tmpdir } from "node:os";
 import { dirname, isAbsolute, join, relative, resolve, sep } from "node:path";
 import { performance } from "node:perf_hooks";
 import {
-	CONFIG_DIR_NAME,
 	type AgentSession,
+	CONFIG_DIR_NAME,
 	type CreateAgentSessionOptions,
 	createAgentSessionFromServices,
 	createAgentSessionServices,
@@ -268,7 +268,7 @@ export function verifySystemPrompt(
 	if (!systemPrompt.includes("\n<rules>\n")) {
 		throw new Error(`Pi system prompt lost its rules in the ${options.name} eval variant.`);
 	}
-	const hasDocumentation = systemPrompt.includes("\n<docs>\nPi documentation (read only");
+	const hasDocumentation = systemPrompt.includes("\n<docs>\n") && systemPrompt.includes("\n</docs>");
 	if (hasDocumentation !== options.expectedPiDocumentation) {
 		throw new Error(`Pi system prompt does not match the ${options.name} eval variant.`);
 	}

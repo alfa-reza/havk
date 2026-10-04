@@ -997,7 +997,7 @@ export class InteractiveMode {
 			const showDetails = this.shouldShowStartupDetails();
 			// Built on demand so the header follows theme changes. The logo's first line carries the version,
 			// its second line the first line of key hints. Terminals that cannot render the logo get a
-			// "Pi vX" line instead, with the key hints below it.
+			// application wordmark and version line instead, with the key hints below it.
 			const showLogo = supportsPiLogo();
 			const withLogo = (hints: string) => {
 				if (!showLogo) return `${piWordmark()} ${theme.fg("dim", `v${this.version}`)}\n${hints}`;
@@ -1047,7 +1047,10 @@ export class InteractiveMode {
 					`Press ${keyText("app.tools.expand")} to show full startup help${showDetails ? " and loaded resources" : ""}.`,
 				);
 			const onboarding = () =>
-				theme.fg("dim", `Pi can explain its own features and look up its docs. Ask it how to use or extend Pi.`);
+				theme.fg(
+					"dim",
+					`${APP_NAME} can explain its own features and look up its docs. Ask it how to use or extend ${APP_NAME}.`,
+				);
 			const header = new BuiltInHeader(
 				() => `${withLogo(compactInstructions())}\n${compactOnboarding()}\n\n${onboarding()}`,
 				() => `${withLogo(expandedInstructions())}\n\n${onboarding()}`,
@@ -1055,7 +1058,8 @@ export class InteractiveMode {
 				1,
 				0,
 			);
-			if (showLogo) header.onLogoClick = (column, row) => playPiLogoAnimation(this.renderer, column, row);
+			if (showLogo && APP_NAME === "pi")
+				header.onLogoClick = (column, row) => playPiLogoAnimation(this.renderer, column, row);
 			this.builtInHeader = header;
 
 			// Setup UI layout
@@ -1306,7 +1310,7 @@ export class InteractiveMode {
 		}
 
 		if (extendedKeysFormat === "xterm") {
-			return "tmux extended-keys-format is xterm. Pi works best with csi-u. Add `set -g extended-keys-format csi-u` to ~/.tmux.conf and restart tmux.";
+			return `tmux extended-keys-format is xterm. ${APP_NAME} works best with csi-u. Add \`set -g extended-keys-format csi-u\` to ~/.tmux.conf and restart tmux.`;
 		}
 
 		return undefined;
@@ -2138,7 +2142,9 @@ export class InteractiveMode {
 	}
 
 	private crashReportInstructions(): string {
-		const resume = this.session.sessionFile ? `run \`${APP_NAME} -r\` to resume the session, then` : "start pi and";
+		const resume = this.session.sessionFile
+			? `run \`${APP_NAME} -r\` to resume the session, then`
+			: `start ${APP_NAME} and`;
 		return `To report this crash: ${resume} run /bug. The crash details are attached automatically.`;
 	}
 
@@ -4155,7 +4161,7 @@ export class InteractiveMode {
 				() =>
 					theme.fg(
 						"warning",
-						`This project is not trusted. Project ${CONFIG_DIR_NAME} resources and packages are ignored. Use /trust to save a trust decision, then restart pi.`,
+						`This project is not trusted. Project ${CONFIG_DIR_NAME} resources and packages are ignored. Use /trust to save a trust decision, then restart ${APP_NAME}.`,
 					),
 				1,
 				0,
